@@ -1,38 +1,29 @@
 const path                 = require('path')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
-const WebpackMd5Hash       = require('webpack-md5-hash')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const CleanWebpackPlugin   = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: { main: './src/index.ts' },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[chunkhash].js'
-  },
+  entry: { main: './src/index.tsx' },
   devtool: "source-map",
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"]
   },
   module: {
     rules: [
-      { test: /\.(tsx|ts)?$/,
-        exclude: /node_modules/,
-        loader: "awesome-typescript-loader" 
+      { 
+        test: /\.js$/, 
+        exclude: /node_modules/, 
+        loader: ["babel-loader", "source-map-loader"] ,
+        enforce: 'pre'
       },
-
-      {
-        test: /\.(js|jsx)$/,
+      { test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        loader: ["babel-loader", "awesome-typescript-loader"]
       },
       {
         test: /\.scss$/,
         use:  [  
           'style-loader', 
-          MiniCssExtractPlugin.loader, 
           'css-loader', 
           'postcss-loader', 
           'sass-loader'
@@ -42,15 +33,18 @@ module.exports = {
   },
   plugins: [ 
     new CleanWebpackPlugin('dist', {} ),
-    new MiniCssExtractPlugin({
-      filename: 'style.[contenthash].css',
-    }),
     new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
       template: './src/index.html',
       filename: 'index.html'
-    }),
-    new WebpackMd5Hash()
-  ]
+    })
+  ],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 8000
+  }
 }
