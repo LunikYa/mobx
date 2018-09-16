@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback --mode development",
-    "dev": "webpack --mode development"
+    "start": "webpack-dev-server --hot --inline --history-api-fallback --mode development",
+    "build": "webpack --mode development"
   },
   "author": "Leonid",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "sass-loader": "^7.1.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.0",
+    "url-loader": "^1.1.1",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13"
   },

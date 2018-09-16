@@ -16,9 +16,14 @@ module.exports = {
         loader: ["babel-loader", "source-map-loader"] ,
         enforce: 'pre'
       },
-      { test: /\.tsx?$/,
+      { 
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: ["babel-loader", "awesome-typescript-loader"]
+      },
+      {
+        test: /\.(png|jp(e*)g|svg|eot|ttf|woff|woff2|otf)$/,
+        loader: ['url-loader', 'image-webpack-loader']
       },
       {
         test: /\.scss$/,
@@ -28,7 +33,8 @@ module.exports = {
           'postcss-loader', 
           'sass-loader'
         ]
-      }
+      },
+      
     ]
   },
   plugins: [ 
