@@ -1,5 +1,5 @@
 {
-  "name": "mobx",
+  "name": "weather",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -25,11 +25,14 @@
     "style-loader": "^0.23.0",
     "url-loader": "^1.1.1",
     "webpack": "^4.4.1",
-    "webpack-cli": "^2.0.13"
+    "webpack-cli": "^2.0.13",
+    "mobx-react-devtools": "^6.0.3"
   },
   "dependencies": {
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
+    "mobx": "^5.1.1",
+    "mobx-react": "^5.2.8",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "typescript": "^3.0.3"
