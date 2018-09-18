@@ -8,6 +8,6 @@ import AppStore from './store/store.js'
 import App from './components/App'
 
 ReactDOM.render(
-  <App store={AppStore}/>,
+  <App store={new AppStore}/>,
   document.getElementById('root')
 )

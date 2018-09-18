@@ -1,0 +1,20 @@
+{
+  "name": "world_of_career",
+  "version": "1.0.0",
+  "description": "description",
+  "main": "app.module.js",
+    "author": "Alexey, Yura, Leonid",
+  "license": "ISC",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "jsonwebtoken": "^8.2.1",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.5",
+    "mongodb": "^3.0.8",
+    "nodemon": "^1.17.3"
+  }
+}
