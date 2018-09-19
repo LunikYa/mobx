@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom'
 import './scss/main.scss'
 
 import AppStore from './store/store.js'
-import App from './components/App'
+import App from './App'
 
 ReactDOM.render(
   <App store={new AppStore}/>,
