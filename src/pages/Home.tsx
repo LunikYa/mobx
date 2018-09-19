@@ -1,12 +1,25 @@
 import * as React from 'react'
+import { observer } from 'mobx-react'
+
 import NavBar from '../components/NavBar'
+import Select from '../components/Select'
 
-
-export default class HomePage extends React.Component<{}, {}> {
+interface countriesStore {
+  fetchCountries: Function,
+  countries: Array<Object>
+}
+@observer
+export default class HomePage extends React.Component<{countriesStore: countriesStore}, {}> {
+  componentDidMount() {
+    this.props.countriesStore.fetchCountries()
+    console.log(this.props)
+  }
   render() {
-    return ( 
+    const { countriesStore } = this.props
+    return (
       <div>
-          <NavBar />
+        <NavBar />
+        <Select options={countriesStore.countries} />
       </div>
     )
   }
