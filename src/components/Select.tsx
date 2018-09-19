@@ -1,10 +1,5 @@
 import * as React from 'react'
 
-interface SelectOption {
-  value: string,
-  name: string
-}
-
 export default class Select extends React.Component<{options: Array<any>}, {}> {
   render(){
     const { options } = this.props
