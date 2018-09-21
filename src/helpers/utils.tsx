@@ -1,11 +1,20 @@
 export function tryJSONparse(obj: any) {
-  console.log('OOOBJS', obj)
-  let result
   try {
-    result = JSON.parse(obj)
+    return JSON.parse(obj)
   } catch (error) {
     console.log(`JSON.parse failed`, error)
-  } finally {
-    return result
   }
+}
+
+export function capitalizeFirstLetter(str: String) {
+  return str ? `${str[0].toUpperCase()}${str.slice(1)}` : ''
+}
+
+export function getOptionsList(list: Array<String>) {
+  return list.map(item => {
+    return {
+      name: capitalizeFirstLetter(item),
+      value: item
+    }
+  })
 }

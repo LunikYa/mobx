@@ -10,7 +10,7 @@ interface store {
 export default class App extends React.Component<{ store: any }, {}> {
   render() {
     const { store } = this.props
-    return ( 
+    return (
       <div>
         <Home countriesStore={store.countriesStore}/>
         {/* <DevTools /> */}

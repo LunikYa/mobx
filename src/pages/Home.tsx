@@ -4,22 +4,26 @@ import { observer } from 'mobx-react'
 import NavBar from '../components/NavBar'
 import Select from '../components/Select'
 
-interface countriesStore {
-  fetchCountries: Function,
-  countries: Array<Object>
-}
 @observer
-export default class HomePage extends React.Component<{countriesStore: countriesStore}, {}> {
+export default class HomePage extends React.Component<{countriesStore: any}, {}> {
   componentDidMount() {
-    this.props.countriesStore.fetchCountries()
-    console.log(this.props)
+    const { countriesStore } = this.props
+    countriesStore.fetchCountries()
+  }
+  chooseCountry = (country: string) => {
+    const { countriesStore } = this.props
+    if (countriesStore.choosedCountry !== country) {
+      countriesStore.choosedCountry = country
+    }
   }
   render() {
     const { countriesStore } = this.props
+    const { countriesList, citiesList } = countriesStore
     return (
       <div>
         <NavBar />
-        <Select options={countriesStore.countries} />
+        <Select options={countriesList} doOnChange={this.chooseCountry}/>
+        <Select options={citiesList} />
       </div>
     )
   }
