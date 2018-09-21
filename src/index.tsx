@@ -6,8 +6,11 @@ import './scss/main.scss'
 
 import AppStore from './store/store'
 import App from './App'
+import { AppContainer } from 'react-hot-loader'
 
 ReactDOM.render(
-  <App store={new AppStore}/>,
-  document.getElementById('root')
+  <AppContainer>
+    <App store={new AppStore}/>
+  </AppContainer>,
+  document.getElementById('root'),
 )

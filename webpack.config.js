@@ -1,9 +1,12 @@
 const path                 = require('path')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
 const CleanWebpackPlugin   = require('clean-webpack-plugin')
+const webpack              = require('webpack')
 
 module.exports = {
-  entry: { main: './src/index.tsx' },
+  entry: { 
+    main: './src/index.tsx'
+  },
   devtool: "source-map",
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"]
@@ -26,8 +29,9 @@ module.exports = {
         loader: ['url-loader', 'image-webpack-loader']
       },
       {
-        test: /\.scss$/,
-        use:  [  
+        test: /\.(scss|css)$/,
+        use:  [
+          'css-hot-loader',
           'style-loader', 
           'css-loader', 
           'postcss-loader', 
@@ -42,7 +46,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html'
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -50,7 +55,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    compress: true,
+    hot: true,
     port: 8000
   }
 }
