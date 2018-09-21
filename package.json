@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --history-api-fallback",
+    "start": "APP_ENV=development webpack-dev-server --mode development --open --history-api-fallback",
     "build": "webpack --mode development"
   },
   "author": "Leonid",
@@ -15,6 +15,7 @@
     "@babel/plugin-proposal-decorators": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@types/why-did-you-update": "^0.0.9",
     "autoprefixer": "^8.2.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.2",
@@ -35,7 +36,8 @@
     "tslint": "^5.11.0",
     "url-loader": "^1.1.1",
     "webpack": "^4.4.1",
-    "webpack-cli": "^2.0.13"
+    "webpack-cli": "^2.0.13",
+    "why-did-you-update": "^0.1.1"
   },
   "dependencies": {
     "@types/react": "^16.4.14",
