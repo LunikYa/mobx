@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "APP_ENV=development webpack-dev-server --mode development --open --history-api-fallback",
+    "start": "REACT_APP_ENV=local webpack-dev-server --mode development --open --history-api-fallback",
     "build": "webpack --mode development"
   },
   "author": "Leonid",
@@ -23,6 +23,7 @@
     "core-js": "^2.5.7",
     "css-hot-loader": "^1.4.2",
     "css-loader": "^1.0.0",
+    "dotenv-webpack": "^1.5.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^3.6.0",
@@ -37,6 +38,7 @@
     "url-loader": "^1.1.1",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.8",
     "why-did-you-update": "^0.1.1"
   },
   "dependencies": {
@@ -46,7 +48,6 @@
     "mobx-react": "^5.2.8",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
-    "typescript": "^3.0.3",
-    "webpack-dev-server": "^3.1.8"
+    "typescript": "^3.0.3"
   }
 }

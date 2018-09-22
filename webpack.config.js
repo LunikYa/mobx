@@ -2,6 +2,7 @@ const path                 = require('path')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
 const CleanWebpackPlugin   = require('clean-webpack-plugin')
 const webpack              = require('webpack')
+const Dotenv               = require('dotenv-webpack')
 
 module.exports = {
   entry: { 
@@ -47,7 +48,8 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html'
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new Dotenv({path: `./.env.${process.env.REACT_APP_ENV}`})
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
