@@ -1,4 +1,4 @@
-export function tryJSONparse(obj: any) {
+export function tryJSONparse(obj: any): object {
   try {
     return JSON.parse(obj)
   } catch (error) {
@@ -6,11 +6,11 @@ export function tryJSONparse(obj: any) {
   }
 }
 
-export function capitalizeFirstLetter(str: String) {
+export function capitalizeFirstLetter(str: string): string {
   return str ? `${str[0].toUpperCase()}${str.slice(1)}` : ''
 }
 
-export function getOptionsList(list: Array<String>) {
+export function getOptionsList(list: Array<string>): Object {
   return list.map(item => {
     return {
       name: capitalizeFirstLetter(item),

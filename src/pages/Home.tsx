@@ -3,6 +3,7 @@ import { observer } from 'mobx-react'
 
 import NavBar from '../components/NavBar'
 import Select from '../components/Select'
+import IDS from '../constants/Ids'
 
 @observer
 export default class HomePage extends React.Component<{countriesStore: any}, {}> {
@@ -24,6 +25,7 @@ export default class HomePage extends React.Component<{countriesStore: any}, {}>
         <NavBar />
         <Select options={countriesList} doOnChange={this.chooseCountry}/>
         <Select options={citiesList} />
+        <div id={IDS.GOOGLE_MAP_CONTAINER_ID}></div>
       </div>
     )
   }
