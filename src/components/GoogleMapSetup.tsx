@@ -3,10 +3,13 @@ import { observer } from 'mobx-react'
 import IDS from '../constants/Ids'
 
 @observer
-export default class GoogleMapSetup extends React.Component<{store: any}, {}> {
+export default class GoogleMapSetup extends React.Component<{store: any, countriesStore: any}, {}> {
   componentDidMount = () => {
-    const { store } = this.props
-    window.initMap = store.initMap
+    const { store, countriesStore } = this.props
+    window.initMap = () => {
+      store.initMap()
+      countriesStore.chooseCountry(store.position)
+    }
     const script = document.createElement('script')
 
     script.type = 'text/javascript'

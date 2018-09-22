@@ -1,6 +1,6 @@
 import { tryJSONparse } from './utils'
 
-export function Call(url: string, method: string, data: any) {
+export function Call(url: string, method?: string, data?: any) {
   return new Promise((resolve, reject) => {
     const xml = new XMLHttpRequest()
     xml.onerror = () => reject(new Error())

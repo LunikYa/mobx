@@ -7,21 +7,39 @@ const countriesUrl = 'https://raw.githubusercontent.com/meMo-Minsk/all-countries
 export default class CountriesStore {
   @observable countriesData: any = {}
   @observable choosedCountry: string = ''
+  @observable choosedCity: string = ''
   @observable status: string = 'pending'
+  @observable geocoder: any 
 
   @computed get countriesList() {
     return getOptionsList(Object.keys(this.countriesData))
   }
 
   @computed get citiesList() {
-    const country = this.countriesData[this.choosedCountry]
-    return country ? getOptionsList(country) : []
+    const currentCountry = this.choosedCountry
+    const citiesList = this.countriesData[currentCountry]
+    return citiesList ? getOptionsList(citiesList) : []
+  }
+  chooseCountry = (): void => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        if (window.google) {
+          const pos = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+          this.geocoder = new window.google.maps.Geocoder()
+          this.geocoder.geocode({latLng: pos}, (result: any)=>{
+            this.choosedCountry = result[8].address_components[3].long_name
+            this.choosedCity = result[8].address_components[0].long_name
+          })
+        } else if (!this.choosedCountry && this.countriesData) {
+          this.choosedCountry = Object.keys(this.countriesData)[0]
+        }
+      })
+    }
   }
   @action fetchCountries() {
     Call(countriesUrl, 'GET', null).then(
       (data: Object) => {
         this.countriesData = data
-        this.choosedCountry = Object.keys(data)[0]
         this.status = 'done'
       },
       error => {
@@ -29,5 +47,5 @@ export default class CountriesStore {
         this.status = 'error'
       }
     )
-  }  
+  }
 }

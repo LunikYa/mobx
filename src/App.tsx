@@ -10,7 +10,7 @@ export default class App extends React.Component<{ store: any }, {}> {
     const { store } = this.props
     return (
       <div>
-        <GoogleMapSetup store={store.mapStore}/>
+        <GoogleMapSetup store={store.mapStore} countriesStore={store.countriesStore}/>
         <Home countriesStore={store.countriesStore}/>
         {/* <DevTools /> */}
       </div>

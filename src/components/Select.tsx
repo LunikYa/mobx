@@ -6,7 +6,7 @@ interface SelectOption {
   name?: string
 }
 
-export default class Select extends React.Component<{options: Array<SelectOption>, doOnChange?: any}, {}> {
+export default class Select extends React.Component<{options: Array<SelectOption>, doOnChange?: any, value: string}, {}> {
   handleChange = (event: any) => {
     const { doOnChange } = this.props
     if (doOnChange) {
@@ -14,9 +14,9 @@ export default class Select extends React.Component<{options: Array<SelectOption
     }
   }
   render(){
-    const { options } = this.props
+    const { options, value } = this.props
     return (
-      <select name="select" className="select-list" onChange={this.handleChange}>
+      <select name="select" className="select-list" onChange={this.handleChange} value={value}>
         {options.map((item, idx) => 
             <option value={item.value} key={idx}>
               {item.name}
