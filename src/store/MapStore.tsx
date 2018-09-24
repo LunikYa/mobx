@@ -13,7 +13,12 @@ export default class mapStore {
   createMap = () => {
     this.googleMap = new window.google.maps.Map(document.getElementById(IDS.GOOGLE_MAP_CONTAINER_ID), {
       center: this.geoPosition,
-      zoom: 10
+      zoom: 10,
+      backgroundColor: '#FFF',
+      disableDefaultUI: true,
+      draggable: false,
+      scaleControl: false,
+      scrollwheel: false
     })
   }
   setGeolocation = () => {

@@ -6,16 +6,19 @@ import Select from '../components/Select'
 import IDS from '../constants/Ids'
 
 @observer
-export default class HomePage extends React.Component<{countriesStore: any}, {}> {
+export default class HomePage extends React.Component<{countriesStore: any, mapStore?: any}, {}> {
   componentDidMount() {
     const { countriesStore } = this.props
     countriesStore.fetchCountries()
   }    
   chooseCountry = (country: string) => {
-    const { countriesStore } = this.props
-    if (countriesStore.choosedCountry !== country) {
-      countriesStore.choosedCountry = country
-    }
+    const { countriesStore, mapStore } = this.props
+    countriesStore.chooseCountry(mapStore, country)
+    // if (countriesStore.chooseCountry !== country) {
+    //   countriesStore.choosedCountry = country
+    //   console.log()
+      // mapStore.map.setCenter(result[8].geometry.location)
+    // }
   }
   render() {
     const { countriesStore } = this.props

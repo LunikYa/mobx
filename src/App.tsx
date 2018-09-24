@@ -11,7 +11,7 @@ export default class App extends React.Component<{ store: any }, {}> {
     return (
       <div>
         <GoogleMapSetup store={store.mapStore} countriesStore={store.countriesStore}/>
-        <Home countriesStore={store.countriesStore}/>
+        <Home countriesStore={store.countriesStore} mapStore={store.mapStore} />
         {/* <DevTools /> */}
       </div>
     )

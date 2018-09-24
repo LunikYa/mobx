@@ -8,7 +8,7 @@ export default class GoogleMapSetup extends React.Component<{store: any, countri
     const { store, countriesStore } = this.props
     window.initMap = () => {
       store.initMap()
-      countriesStore.chooseCountry(store.position)
+      countriesStore.chooseCountry()
     }
     const script = document.createElement('script')
 
