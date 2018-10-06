@@ -20,18 +20,10 @@ export default class CountriesStore {
     return citiesList ? getOptionsList(citiesList) : []
   }
   chooseCountry = (store: any, country?: string): void => {
-    if (!store) {
-      return
-    }
     if (country) {
       this.choosedCountry = country
       const city = this.countriesData[country][0]
-      this.geocoder = new window.google.maps.Geocoder()
-      this.geocoder.geocode( {'address' : city}, (results: any, status: any) => {
-        const newCountry = results[0].formatted_address
-        // this.choosedCountry = newCountry
-        store.map.setCenter(results[0].geometry.location)
-      })
+      this.setCity(store, city)
     } else if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         if (window.google) {
@@ -40,13 +32,19 @@ export default class CountriesStore {
           this.geocoder.geocode({ latLng: pos}, (result: any) => {
             this.choosedCountry = result[8].address_components[3].long_name
             this.choosedCity = result[8].address_components[0].long_name
-            store.map.setCenter(result[8].geometry.location)
           })
         } else if (!this.choosedCountry && this.countriesData) {
           this.choosedCountry = Object.keys(this.countriesData)[0]
         }
       })
     }
+  }
+  setCity = (store: any, city: string) => {
+    this.choosedCity = city
+    this.geocoder = new window.google.maps.Geocoder()
+    this.geocoder.geocode( {'address' : city}, (results: any, status: any) => {
+      store.map.setCenter(results[0].geometry.location)
+    })
   }
   @action fetchCountries() {
     Call(countriesUrl).then(

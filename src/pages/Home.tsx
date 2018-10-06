@@ -20,6 +20,10 @@ export default class HomePage extends React.Component<{countriesStore: any, mapS
       // mapStore.map.setCenter(result[8].geometry.location)
     // }
   }
+  chooseCity = (city: string) => {
+    const { countriesStore, mapStore } = this.props
+    countriesStore.setCity(mapStore, city)
+  }
   render() {
     const { countriesStore } = this.props
     const { countriesList, citiesList } = countriesStore
@@ -27,8 +31,8 @@ export default class HomePage extends React.Component<{countriesStore: any, mapS
       <div>
         <NavBar />
         <Select options={countriesList} doOnChange={this.chooseCountry} value={countriesStore.choosedCountry}/>
-        <Select options={citiesList}  value={countriesStore.choosedCity}/>
-        <div id={IDS.GOOGLE_MAP_CONTAINER_ID}></div>
+        <Select options={citiesList}  doOnChange={this.chooseCity} value={countriesStore.choosedCity}/>
+        <div id={IDS.GOOGLE_MAP_CONTAINER_ID}></div> 
       </div>
     )
   }
