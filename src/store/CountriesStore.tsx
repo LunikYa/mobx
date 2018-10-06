@@ -10,14 +10,22 @@ export default class CountriesStore {
   @observable choosedCity: string = ''
   @observable status: string = 'pending'
   @observable geocoder: any 
+  @observable cityFilter: string = ''
+  @observable countryFilter: string = ''
 
   @computed get countriesList() {
-    return getOptionsList(Object.keys(this.countriesData))
+    return getOptionsList(Object.keys(this.countriesData)).filter((item: any) => item.value.toLowerCase().indexOf(this.countryFilter.toLowerCase()) === 0)
   }
   @computed get citiesList() {
     const currentCountry = this.choosedCountry
     const citiesList = this.countriesData[currentCountry]
-    return citiesList ? getOptionsList(citiesList) : []
+    return citiesList ? getOptionsList(citiesList).filter((item: any) => item.value.toLowerCase().indexOf(this.cityFilter.toLowerCase()) === 0) : []
+  }
+  setCityFilterValue = (value: string) => {
+    this.cityFilter = value
+  }
+  setCountryFilterValue = (value: string) => {
+    this.countryFilter = value
   }
   chooseCountry = (store: any, country?: string): void => {
     if (country) {
@@ -25,25 +33,28 @@ export default class CountriesStore {
       const city = this.countriesData[country][0]
       this.setCity(store, city)
     } else if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        if (window.google) {
-          const pos = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-          this.geocoder = new window.google.maps.Geocoder()
-          this.geocoder.geocode({ latLng: pos}, (result: any) => {
-            this.choosedCountry = result[8].address_components[3].long_name
-            this.choosedCity = result[8].address_components[0].long_name
-          })
-        } else if (!this.choosedCountry && this.countriesData) {
-          this.choosedCountry = Object.keys(this.countriesData)[0]
-        }
-      })
+      this.defineGeolocation()
     }
   }
   setCity = (store: any, city: string) => {
     this.choosedCity = city
     this.geocoder = new window.google.maps.Geocoder()
-    this.geocoder.geocode( {'address' : city}, (results: any, status: any) => {
+    this.geocoder.geocode({ address: city }, (results: any, status: any) => {
       store.map.setCenter(results[0].geometry.location)
+    })
+  }
+  defineGeolocation = () => {
+    navigator.geolocation.getCurrentPosition(position => {
+      if (window.google) {
+        const pos = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+        this.geocoder = new window.google.maps.Geocoder()
+        this.geocoder.geocode({ latLng: pos }, (result: any) => {
+          this.choosedCountry = result[8].address_components[3].long_name
+          this.choosedCity = result[8].address_components[0].long_name
+        })
+      } else if (!this.choosedCountry && this.countriesData) {
+        this.choosedCountry = Object.keys(this.countriesData)[0]
+      }
     })
   }
   @action fetchCountries() {

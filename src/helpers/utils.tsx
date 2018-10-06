@@ -10,7 +10,7 @@ export function capitalizeFirstLetter(str: string): string {
   return str ? `${str[0].toUpperCase()}${str.slice(1)}` : ''
 }
 
-export function getOptionsList(list: Array<string>): Object {
+export function getOptionsList(list: Array<string>): any {
   return list.map(item => {
     return {
       name: capitalizeFirstLetter(item),

@@ -14,11 +14,6 @@ export default class HomePage extends React.Component<{countriesStore: any, mapS
   chooseCountry = (country: string) => {
     const { countriesStore, mapStore } = this.props
     countriesStore.chooseCountry(mapStore, country)
-    // if (countriesStore.chooseCountry !== country) {
-    //   countriesStore.choosedCountry = country
-    //   console.log()
-      // mapStore.map.setCenter(result[8].geometry.location)
-    // }
   }
   chooseCity = (city: string) => {
     const { countriesStore, mapStore } = this.props
@@ -30,9 +25,19 @@ export default class HomePage extends React.Component<{countriesStore: any, mapS
     return (
       <div>
         <NavBar />
-        <Select options={countriesList} doOnChange={this.chooseCountry} value={countriesStore.choosedCountry}/>
-        <Select options={citiesList}  doOnChange={this.chooseCity} value={countriesStore.choosedCity}/>
-        <div id={IDS.GOOGLE_MAP_CONTAINER_ID}></div> 
+        <Select 
+          options={countriesList} 
+          doOnChange={this.chooseCountry} 
+          value={countriesStore.choosedCountry} 
+          filter={countriesStore.setCountryFilterValue}
+        />
+        <Select 
+          options={citiesList}  
+          doOnChange={this.chooseCity} 
+          value={countriesStore.choosedCity} 
+          filter={countriesStore.setCityFilterValue}
+        />
+        <div id={IDS.GOOGLE_MAP_CONTAINER_ID} />
       </div>
     )
   }
