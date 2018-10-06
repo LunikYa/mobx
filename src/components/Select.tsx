@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { render } from 'react-dom';
+import Filter from './Filter'
 
 interface SelectOption {
   value?: string,
@@ -13,10 +13,15 @@ export default class Select extends React.Component<{options: Array<SelectOption
       doOnChange(event.target.value)
     }
   }
+  handleFilter = (filtredList: any[]) => {
+    console.log(filtredList)
+  }
   render(){
     const { options, value } = this.props
     return (
-      <select name="select" className="select-list" onChange={this.handleChange} value={value}>
+      <div>
+        <Filter list={options} callBack={this.handleFilter}/>
+        <select name="select" className="select-list" onChange={this.handleChange} value={value}>
         {options.map((item, idx) => 
             <option value={item.value} key={idx}>
               {item.name}
@@ -24,6 +29,8 @@ export default class Select extends React.Component<{options: Array<SelectOption
           )
         }
       </select>
+      </div>
+      
     )
   }
 }
