@@ -14,11 +14,12 @@ export default class CountriesStore {
   @observable countryFilter: string = ''
 
   @computed get countriesList() {
-    return getOptionsList(Object.keys(this.countriesData)).filter((item: any) => item.value.toLowerCase().indexOf(this.countryFilter.toLowerCase()) === 0)
+    const result = getOptionsList(Object.keys(this.countriesData)).filter((item: any) => item.value.toLowerCase().indexOf(this.countryFilter.toLowerCase()) === 0)
+    // this.choosedCountry = result[0]
+    return result
   }
   @computed get citiesList() {
-    const currentCountry = this.choosedCountry
-    const citiesList = this.countriesData[currentCountry]
+    const citiesList = this.countriesData[this.choosedCountry]
     return citiesList ? getOptionsList(citiesList).filter((item: any) => item.value.toLowerCase().indexOf(this.cityFilter.toLowerCase()) === 0) : []
   }
   setCityFilterValue = (value: string) => {

@@ -11,7 +11,7 @@ export function capitalizeFirstLetter(str: string): string {
 }
 
 export function getOptionsList(list: Array<string>): any {
-  return list.map(item => {
+  return list.map((item: string) => {
     return {
       name: capitalizeFirstLetter(item),
       value: item
