@@ -15,7 +15,6 @@ export default class CountriesStore {
 
   @computed get countriesList() {
     const result = getOptionsList(Object.keys(this.countriesData)).filter((item: any) => item.value.toLowerCase().indexOf(this.countryFilter.toLowerCase()) === 0)
-    // this.choosedCountry = result[0]
     return result
   }
   @computed get citiesList() {
@@ -27,6 +26,7 @@ export default class CountriesStore {
   }
   setCountryFilterValue = (value: string) => {
     this.countryFilter = value
+    this.choosedCountry = this.countriesList[0]
   }
   chooseCountry = (store: any, country?: string): void => {
     if (country) {
